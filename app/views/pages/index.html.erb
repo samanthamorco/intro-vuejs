@@ -1,4 +1,10 @@
 <h1>Pages#index</h1>
 <div id="app">
-  {{ message }}
+  <ul>
+    <li v-for="task in tasks" v-on:click="markComplete(task)" v-bind:class="{strike: task.complete}">
+      {{ task.name }}: {{ task.difficulty }}
+    </li>
+  </ul>
+  <input v-model="newTask">
+  <button v-on:click="addTask()">Add Task</button>
 </div>
