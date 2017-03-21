@@ -9,7 +9,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       nameFilter: "",
       descriptionFilter: "",
       orderAttribute: "name",
-      orderAscending: true
+      orderAscending: true,
+      hover: "You loaded this page on " + new Date()
     },
     mounted: function() {
       $.get("/api/v1/tasks.json", function(result) {
@@ -63,4 +64,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       }
     }
   });
+
+  Vue.component('todo-item', {
+    props: ["todo"],
+    template: '<li>{{ todo.description }}</li>'
+  })
 });

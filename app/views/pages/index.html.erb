@@ -1,5 +1,5 @@
-<h1>Tasks!</h1>
 <div id="app">
+  <h1 v-bind:title="hover">Welcome!</h1>
   <datalist id="names">
     <option v-for="task in tasks">{{task.name}}</option>
   </datalist>
@@ -9,6 +9,7 @@
     <button v-on:click="setOrderAttribute('name')">Order by name</button>
     <button v-on:click="setOrderAttribute('description')">Order by description</button>
   </div>
+  <todo-item v-for="task in tasks" v-bind:todo="task"></todo-item>
   <ul>
     <transition-group name="slide-left">
       <li v-for="task in filteredTasks" v-on:click="markComplete(task)" v-bind:class="{strike: task.complete}" v-bind:key="task.id">
