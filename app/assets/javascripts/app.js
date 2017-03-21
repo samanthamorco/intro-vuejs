@@ -1,17 +1,17 @@
 document.addEventListener("DOMContentLoaded", function(event) { 
+  var data = {tasks: [],
+              newTaskName: "",
+              newTaskDescription: "",
+              errors: [],
+              nameFilter: "",
+              descriptionFilter: "",
+              orderAttribute: "name",
+              orderAscending: true,
+              hover: "You loaded this page on " + new Date()
+             }
   var app = new Vue({
     el: '#app',
-    data: {
-      tasks: [],
-      newTaskName: "",
-      newTaskDescription: "",
-      errors: [],
-      nameFilter: "",
-      descriptionFilter: "",
-      orderAttribute: "name",
-      orderAscending: true,
-      hover: "You loaded this page on " + new Date()
-    },
+    data: data,
     mounted: function() {
       $.get("/api/v1/tasks.json", function(result) {
         this.tasks = result;
