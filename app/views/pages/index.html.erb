@@ -1,17 +1,21 @@
-<h1>Pages#index</h1>
+<h1>Tasks!</h1>
 <div id="app">
-  Search by name: <input v-model="nameFilter">
+  <datalist id="names">
+    <option v-for="task in tasks">{{task.name}}</option>
+  </datalist>
+  Search by name: <input v-model="nameFilter" list="names">
   Search by description: <input v-model="descriptionFilter">
   <div>
     <button v-on:click="setOrderAttribute('name')">Order by name</button>
     <button v-on:click="setOrderAttribute('description')">Order by description</button>
   </div>
   <ul>
-    <li v-for="task in filteredTasks" v-on:click="markComplete(task)" v-bind:class="{strike: task.complete}">
-      {{ task.name }}: {{ task.description }}
-    </li>
+    <transition-group name="slide-left">
+      <li v-for="task in filteredTasks" v-on:click="markComplete(task)" v-bind:class="{strike: task.complete}" v-bind:key="task.id">
+        {{ task.name }}: {{ task.description }}
+      </li>
+    </transition-group>
   </ul>
-
   <ul>
     <li v-for="error in errors">{{ error }}</li>
   </ul>
