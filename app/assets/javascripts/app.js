@@ -6,7 +6,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       newTaskName: "",
       newTaskDescription: "",
       errors: [],
-      nameFilter: ""
+      nameFilter: "",
+      descriptionFilter: ""
     },
     mounted: function() {
       $.get("/api/v1/tasks.json", function(result) {
@@ -38,10 +39,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     computed: {
       filteredTasks: function() {
-        var filtered = this.tasks.filter(function(task) {
-          return task.name.toLowerCase().indexOf(this.nameFilter.toLowerCase()) !== -1;
+        var filteredList = this.tasks.filter(function(task) {
+          return task.name.toLowerCase().indexOf(this.nameFilter.toLowerCase()) !== -1 && task.description.toLowerCase().indexOf(this.descriptionFilter.toLowerCase()) !== -1;
         }.bind(this));
-        return filtered;
+        return filteredList;
       }
     }
   });
