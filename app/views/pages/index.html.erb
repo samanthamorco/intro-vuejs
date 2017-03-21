@@ -1,5 +1,6 @@
 <h1>Pages#index</h1>
 <div id="app">
+  Search by name: <input v-model="nameFilter">
   <ul>
     <li v-for="task in filteredTasks" v-on:click="markComplete(task)" v-bind:class="{strike: task.complete}">
       {{ task.name }}: {{ task.description }}

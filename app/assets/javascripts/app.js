@@ -5,7 +5,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
       tasks: [],
       newTaskName: "",
       newTaskDescription: "",
-      errors: []
+      errors: [],
+      nameFilter: ""
     },
     mounted: function() {
       $.get("/api/v1/tasks.json", function(result) {
@@ -38,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
     computed: {
       filteredTasks: function() {
         var filtered = this.tasks.filter(function(task) {
-          return task.name !== "Sami"
+          return task.name.toLowerCase().indexOf(this.nameFilter.toLowerCase()) !== -1;
         }.bind(this));
         return filtered;
       }
