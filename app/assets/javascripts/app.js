@@ -34,6 +34,14 @@ document.addEventListener("DOMContentLoaded", function(event) {
       markComplete: function(inputTask) {
         inputTask.complete = true
       }
+    },
+    computed: {
+      filteredTasks: function() {
+        var filtered = this.tasks.filter(function(task) {
+          return task.name !== "Sami"
+        }.bind(this));
+        return filtered;
+      }
     }
   });
 });
