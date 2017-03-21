@@ -2,9 +2,10 @@
 <div id="app">
   <ul>
     <li v-for="task in tasks" v-on:click="markComplete(task)" v-bind:class="{strike: task.complete}">
-      {{ task.name }}: {{ task.difficulty }}
+      {{ task.name }}: {{ task.description }}
     </li>
   </ul>
-  <input v-model="newTask">
+  <label>Task Assignee: </label><input v-model="newTaskName">
+  <label>Task Description: </label><input v-model="newTaskDescription">
   <button v-on:click="addTask()">Add Task</button>
 </div>
