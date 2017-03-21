@@ -5,6 +5,10 @@
       {{ task.name }}: {{ task.description }}
     </li>
   </ul>
+
+  <ul>
+    <li v-for="error in errors">{{ error }}</li>
+  </ul>
   <label>Task Assignee: </label><input v-model="newTaskName">
   <label>Task Description: </label><input v-model="newTaskDescription">
   <button v-on:click="addTask()">Add Task</button>

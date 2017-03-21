@@ -4,7 +4,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
     data: {
       tasks: [],
       newTaskName: "",
-      newTaskDescription: ""
+      newTaskDescription: "",
+      errors: []
     },
     mounted: function() {
       $.get("/api/v1/tasks.json", function(result) {
@@ -13,14 +14,17 @@ document.addEventListener("DOMContentLoaded", function(event) {
     },
     methods: {
       addTask: function() {
+        this.errors = [];
         var params = {
           name: this.newTaskName,
           description: this.newTaskDescription
         };
-        $.post("/api/v1/tasks.json", params, function(result) {
+        $.post('/api/v1/tasks.json', params, function(result) {
           this.tasks.push(result);
           this.newTaskName = '';
           this.newTaskDescription = '';
+        }.bind(this)).fail(function(response) {
+          this.errors = response.responseJSON.errors;
         }.bind(this));
       },
       deleteTask: function(inputTask) {
