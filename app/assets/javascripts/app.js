@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
       newTaskDescription: "",
       errors: [],
       nameFilter: "",
-      descriptionFilter: ""
+      descriptionFilter: "",
+      orderAttribute: "name",
+      orderAscending: true
     },
     mounted: function() {
       $.get("/api/v1/tasks.json", function(result) {
@@ -35,14 +37,29 @@ document.addEventListener("DOMContentLoaded", function(event) {
       },
       markComplete: function(inputTask) {
         inputTask.complete = true
+      },
+      setOrderAttribute: function(inputAttribute) {
+        if (inputAttribute !== this.orderAttribute) {
+          this.orderAscending = true;
+        } else {
+          this.orderAscending = !this.orderAscending;
+        }
+        this.orderAttribute = inputAttribute;
       }
     },
     computed: {
       filteredTasks: function() {
-        var filteredList = this.tasks.filter(function(task) {
+        var filtered = this.tasks.filter(function(task) {
           return task.name.toLowerCase().indexOf(this.nameFilter.toLowerCase()) !== -1 && task.description.toLowerCase().indexOf(this.descriptionFilter.toLowerCase()) !== -1;
         }.bind(this));
-        return filteredList;
+        var sorted = filtered.sort(function(a, b) {
+          if (this.orderAscending) {
+            return a[this.orderAttribute] > b[this.orderAttribute]
+          } else {
+          return a[this.orderAttribute] < b[this.orderAttribute]
+          }
+        }.bind(this));
+        return filtered;
       }
     }
   });
