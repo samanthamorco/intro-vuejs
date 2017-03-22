@@ -1,9 +1,14 @@
 <div id="app">
   <h1 :title="hover">Welcome!</h1>
   <h2 v-if="boolean">The first boolean is true!</h2>
-  <h2 v-else>The first boolean is false!</h2>
-  <h2 v-if="otherBoolean">The second boolean is true!</h2>
-  <h2 v-else>The second boolean is false!</h2>
+  <h2 v-else-if="!otherBoolean">The second boolean is false!</h2>
+  <h2 v-else>The second boolean is true!</h2>
+
+  <div>
+    <h3>Count to 10:</h3>
+    <div v-for="n in 10">{{ n }}</div>
+  </div>
+
   <datalist id="names">
     <option v-for="task in tasks">{{task.name}}</option>
   </datalist>
