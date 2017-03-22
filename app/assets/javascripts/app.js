@@ -11,9 +11,19 @@ document.addEventListener("DOMContentLoaded", function(event) {
               boolean: false,
               otherBoolean: true
              }
+  Vue.component("test-component", {
+    template: "<h1>Components!</h1>"
+  })
+
+  var customComponent = {
+    template: "<h2>Custom component!</h2>"
+  }
   var app = new Vue({
     el: '#app',
     data: data,
+    components: {
+      custom: customComponent
+    },
     mounted: function() {
       $.get("/api/v1/tasks.json", function(result) {
         this.tasks = result;

@@ -1,4 +1,6 @@
 <div id="app">
+  <test-component></test-component>
+  <custom></custom>
   <h1 :title="hover">Welcome!</h1>
   <h2 v-if="boolean">The first boolean is true!</h2>
   <h2 v-else-if="!otherBoolean">The second boolean is false!</h2>
@@ -18,11 +20,11 @@
     <button @click="setOrderAttribute('name')">Order by name</button>
     <button @click="setOrderAttribute('description')">Order by description</button>
   </div>
-  <todo-item v-for="task in tasks" :todo="task"></todo-item>
+  <todo-item v-for="task in tasks" :todo="task" track-by="$index"></todo-item>
   <ul>
     <transition-group name="slide-left">
       <li v-for="task in filteredTasks" @click="markComplete(task)" :class="{strike: task.complete}" :key="task.id">
-        {{ index}}. {{ task.name }}: {{ task.description }}
+        {{ $index }}. {{ task.name }}: {{ task.description }}
       </li>
     </transition-group>
   </ul>
