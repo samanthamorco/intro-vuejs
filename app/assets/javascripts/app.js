@@ -7,7 +7,9 @@ document.addEventListener("DOMContentLoaded", function(event) {
               descriptionFilter: "",
               orderAttribute: "name",
               orderAscending: true,
-              hover: "You loaded this page on " + new Date()
+              hover: "You loaded this page on " + new Date(),
+              boolean: false,
+              otherBoolean: true
              }
   var app = new Vue({
     el: '#app',
